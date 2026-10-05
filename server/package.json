@@ -1,0 +1,19 @@
+{
+  "name": "localkhoj-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --no-warnings index.js",
+    "dev": "node --no-warnings --watch index.js",
+    "seed": "node --no-warnings seed.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2"
+  }
+}

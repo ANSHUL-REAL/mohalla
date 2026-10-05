@@ -1,0 +1,26 @@
+{
+  "name": "mohalla-demo-video",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "record": "node record.mjs",
+    "encode": "python encode.py",
+    "studio": "remotion studio src/index.js",
+    "render": "npm run render:raw && ffmpeg -y -loglevel error -i out/raw.mp4 -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -color_range tv -movflags +faststart -an \"../../Mohalla_Demo.mp4\"",
+    "render:raw": "remotion render src/index.js MohallaDemo out/raw.mp4 --codec h264 --crf 16",
+    "audio:launch": "python build_audio.py",
+    "render:launch": "remotion render src/index.js MohallaLaunch out/launch_raw.mp4 --codec h264 --crf 16 && ffmpeg -y -loglevel error -i out/launch_raw.mp4 -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -color_range tv -c:a aac -b:a 192k -af loudnorm=I=-14:TP=-1.5:LRA=11 -ar 48000 -movflags +faststart \"../../Mohalla_Launch.mp4\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "^4.0.533",
+    "@remotion/google-fonts": "^4.0.533",
+    "playwright-core": "^1.63.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.533"
+  },
+  "private": true
+}

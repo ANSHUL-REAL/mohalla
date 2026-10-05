@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: mohalla
+    runtime: node
+    plan: free
+    buildCommand: npm run setup && npm run build
+    startCommand: npm run seed && npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: JWT_SECRET
+        generateValue: true

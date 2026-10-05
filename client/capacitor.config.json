@@ -1,0 +1,12 @@
+{
+  "appId": "com.mohalla.app",
+  "appName": "Mohalla",
+  "webDir": "dist-app",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

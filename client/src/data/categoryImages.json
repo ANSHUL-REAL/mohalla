@@ -1,0 +1,116 @@
+{
+ "restaurants": [
+  "restaurants-1.jpg",
+  "restaurants-2.jpg",
+  "restaurants-3.jpg",
+  "restaurants-4.jpg",
+  "restaurants-5.jpg",
+  "restaurants-6.jpg"
+ ],
+ "hotels": [
+  "hotels-1.jpg",
+  "hotels-2.jpg",
+  "hotels-3.jpg",
+  "hotels-4.jpg",
+  "hotels-5.jpg",
+  "hotels-6.jpg"
+ ],
+ "doctors": [
+  "doctors-1.jpg",
+  "doctors-2.jpg",
+  "doctors-4.jpg",
+  "doctors-5.jpg",
+  "doctors-6.jpg"
+ ],
+ "plumbers": [
+  "plumbers-1.jpg",
+  "plumbers-2.jpg",
+  "plumbers-3.jpg",
+  "plumbers-4.jpg",
+  "plumbers-5.jpg",
+  "plumbers-6.jpg"
+ ],
+ "electricians": [
+  "electricians-1.jpg",
+  "electricians-2.jpg",
+  "electricians-3.jpg",
+  "electricians-4.jpg",
+  "electricians-5.jpg",
+  "electricians-6.jpg"
+ ],
+ "ac-repair": [
+  "ac-repair-1.jpg",
+  "ac-repair-2.jpg",
+  "ac-repair-3.jpg",
+  "ac-repair-4.jpg",
+  "ac-repair-5.jpg",
+  "ac-repair-6.jpg"
+ ],
+ "beauty-spa": [
+  "beauty-spa-1.jpg",
+  "beauty-spa-2.jpg",
+  "beauty-spa-3.jpg",
+  "beauty-spa-4.jpg",
+  "beauty-spa-5.jpg",
+  "beauty-spa-6.jpg"
+ ],
+ "gyms": [
+  "gyms-1.jpg",
+  "gyms-2.jpg",
+  "gyms-3.jpg",
+  "gyms-4.jpg",
+  "gyms-5.jpg",
+  "gyms-6.jpg"
+ ],
+ "coaching": [
+  "coaching-1.jpg",
+  "coaching-2.jpg",
+  "coaching-3.jpg",
+  "coaching-4.jpg",
+  "coaching-5.jpg",
+  "coaching-6.jpg"
+ ],
+ "car-repair": [
+  "car-repair-1.jpg",
+  "car-repair-2.jpg",
+  "car-repair-4.jpg",
+  "car-repair-5.jpg",
+  "car-repair-6.jpg"
+ ],
+ "packers-movers": [
+  "packers-movers-1.jpg",
+  "packers-movers-2.jpg",
+  "packers-movers-3.jpg",
+  "packers-movers-4.jpg",
+  "packers-movers-5.jpg",
+  "packers-movers-6.jpg"
+ ],
+ "pharmacy": [
+  "pharmacy-1.jpg",
+  "pharmacy-2.jpg",
+  "pharmacy-4.jpg",
+  "pharmacy-6.jpg"
+ ],
+ "grocery": [
+  "grocery-1.jpg",
+  "grocery-2.jpg",
+  "grocery-3.jpg",
+  "grocery-4.jpg",
+  "grocery-5.jpg",
+  "grocery-6.jpg"
+ ],
+ "banks": [
+  "banks-1.jpg",
+  "banks-2.jpg",
+  "banks-3.jpg",
+  "banks-4.jpg",
+  "banks-5.jpg",
+  "banks-6.jpg"
+ ],
+ "education": [
+  "education-1.jpg",
+  "education-2.jpg",
+  "education-3.jpg",
+  "education-5.jpg"
+ ]
+}

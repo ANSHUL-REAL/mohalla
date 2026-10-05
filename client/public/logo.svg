@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Mohalla mark: map pin with a little house (mohalla = neighbourhood) and a sparkle -->
+  <rect x="5" y="5" width="56" height="56" rx="14" fill="#111"/>
+  <rect x="2" y="2" width="56" height="56" rx="14" fill="#FFC567" stroke="#111" stroke-width="3"/>
+  <path d="M33 14c-8.8 0-16 6.9-16 15.5C17 41 33 55 33 55s16-14 16-25.5C49 20.9 41.8 14 33 14z" fill="#111"/>
+  <path d="M30 11c-8.8 0-16 6.9-16 15.5C14 38 30 52 30 52s16-14 16-25.5C46 17.9 38.8 11 30 11z" fill="#FD5A46" stroke="#111" stroke-width="2.6" stroke-linejoin="round"/>
+  <circle cx="30" cy="26" r="9.6" fill="#fff" stroke="#111" stroke-width="2.4"/>
+  <rect x="24.8" y="25.4" width="10.4" height="6.6" fill="#FB7DA8" stroke="#111" stroke-width="1.4"/>
+  <path d="M22.6 26.2L30 19l7.4 7.2z" fill="#552CB7" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/>
+  <rect x="28.5" y="28" width="3" height="4" fill="#111"/>
+  <path d="M49 6.5l1.9 4.6 4.6 1.9-4.6 1.9L49 19.5l-1.9-4.6-4.6-1.9 4.6-1.9z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/>
+</svg>
