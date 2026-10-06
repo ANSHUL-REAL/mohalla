@@ -1,53 +1,26 @@
 # Mohalla. — Your neighbourhood, one tap away
 
 A local business search app (like JustDial) built as a college project. It shows **real businesses near you**
-from OpenStreetMap, plus listings that business owners add themselves.
+from OpenStreetMap, plus listings that business owners add themselves. It comes as a website and an Android app,
+both backed by the same Node.js server.
 
-## Run it
+**🌐 Live site: https://mohalla-b0lx.onrender.com**
 
-Needs **Node.js 22+** (uses the built-in SQLite database — nothing else to install).
+> Hosted on Render's free plan: the server sleeps when nobody has used it for ~15 minutes, so the first visit can
+> take up to a minute to load. Open the link a minute before a demo.
 
-```bash
-npm run setup      # install packages (first time only)
-npm run build      # build the website
-npm run seed       # reset demo data (run this before every demo — live statuses expire after 12 h)
-npm start          # open http://localhost:5000
-```
+## Downloads
 
-For development with hot reload, run `npm run dev:server` and `npm run dev:client` in two terminals and open http://localhost:5173.
+Everything below is on the [Releases page](https://github.com/ANSHUL-REAL/mohalla/releases/tag/v1.0):
 
-## Live demo / hosting
+| File | What it is |
+|---|---|
+| `Mohalla.apk` | Android app — connects to the live server, works on any network |
+| `Mohalla_Presentation.pptx` | Project presentation |
+| `Mohalla_Demo.mp4` | Demo video walking through the app |
+| `Mohalla_Launch.mp4` | Short launch / promo video |
 
-The whole app (API + website) runs as one Node server, so it can be hosted for free on [Render](https://render.com):
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ANSHUL-REAL/mohalla)
-
-`render.yaml` sets it up: it builds the website, seeds fresh demo data and starts the server on every deploy.
-(On the free plan the server sleeps when idle, so the first visit can take ~1 minute to wake it up.)
-
-The Android app (`Mohalla.apk`), presentation and demo videos are on the
-[Releases page](https://github.com/ANSHUL-REAL/mohalla/releases).
-
-## Android app
-
-`Mohalla.apk` (on the Releases page) is the Android app. Its screens are inside the APK and it gets listings from
-the online server at **https://mohalla-b0lx.onrender.com**, so it works on any network — just install and open it
-(allow "Install unknown apps" when asked). The first open after the server has been idle shows
-"Waking up the server…" for up to a minute.
-
-To use a laptop instead (e.g. with no internet), run `npm start`, open **Server settings** (link on the Login /
-Account page) and type the address it prints, e.g. `http://192.168.1.7:5000` — phone and laptop must be on the
-same Wi-Fi. **Use online server** on that screen switches back.
-
-To rebuild the APK after changing the code (needs JDK 17 and the Android SDK):
-
-```bash
-cd client
-npm run android     # builds the app bundle, syncs it and runs Gradle
-```
-
-The result is `client/android/app/build/outputs/apk/debug/app-debug.apk`. The server address baked
-into the APK is in `client/.env.app`. App icon and splash screen are drawn by `python tools/make_icons.py`.
+`Mohalla_Start_and_Demo_Guide.pdf` (in this repo) explains how to start the app and present the demo.
 
 ## Demo logins
 
@@ -56,6 +29,8 @@ into the APK is in `client/.env.app`. App icon and splash screen are drawn by `p
 | Admin | admin@mohalla.test | admin123 |
 | Business owner | owner@mohalla.test | owner123 |
 | Customer | user@mohalla.test | user123 |
+
+The demo data is reset every time the server restarts, so anything added on the live site is temporary.
 
 ## Features
 
@@ -81,21 +56,96 @@ into the APK is in `client/.env.app`. App icon and splash screen are drawn by `p
 6. **Walking time** next to nearby places, and **claim this business** for real listings
 7. If nobody is open right now, results fall back to the nearest places with their next opening time instead of an empty page
 
+## How it fits together
+
+```
+ Browser ──────────────┐
+                       ├──►  Node.js + Express server (Render)  ──►  SQLite database
+ Android app (APK) ────┘          │  also serves the built website
+                                  └──►  OpenStreetMap (Overpass + Nominatim) for real nearby places
+```
+
+The website is served by the same server as the API. The Android app has its screens built into the APK and calls
+the API at https://mohalla-b0lx.onrender.com.
+
+## Run it on your own computer
+
+Needs **Node.js 22.13 or newer** (tested on Node 24). It uses Node's built-in SQLite, so there is no database to install.
+
+```bash
+npm run setup      # install packages (first time only)
+npm run build      # build the website
+npm run seed       # reset demo data (live statuses expire after 12 h)
+npm start          # open http://localhost:5000
+```
+
+For development with hot reload, run `npm run dev:server` and `npm run dev:client` in two terminals and open
+http://localhost:5173.
+
+API tests (95 tests):
+
+```bash
+sh server/test/restart.sh && node --test server/test/api.test.mjs
+```
+
+## Hosting (Render)
+
+The live site runs on [Render](https://render.com)'s free plan using the `render.yaml` blueprint in this repo:
+
+| Setting | Value |
+|---|---|
+| Build command | `npm run setup && npm run build` |
+| Start command | `npm run seed && npm start` (fresh demo data on every start) |
+| Node version | `NODE_VERSION=24` |
+| Login secret | `JWT_SECRET` — generated by Render |
+
+Every push to `main` redeploys automatically. To host your own copy, fork the repo and use
+**New + → Blueprint** on Render, or this button:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ANSHUL-REAL/mohalla)
+
+## Android app
+
+Install `Mohalla.apk` from the Releases page (allow "Install unknown apps" when asked) and open it. It connects to
+the live server, so it works on mobile data or any Wi-Fi. After the server has been idle, the first open shows
+"Waking up the server…" for up to a minute.
+
+**Using a laptop instead of the live server** (e.g. no internet): run `npm start` on the laptop, then in the app
+open **Server settings** (link on the Login / Account page) and type the address the laptop prints, e.g.
+`http://192.168.1.7:5000`. The phone and laptop must be on the same Wi-Fi or hotspot. **Use online server** on the
+same screen switches back.
+
+**Rebuilding the APK** (needs JDK 17 and the Android SDK):
+
+```bash
+cd client
+npm run android     # builds the app bundle, syncs it and runs Gradle
+```
+
+The result is `client/android/app/build/outputs/apk/debug/app-debug.apk`. The server address built into the APK
+is set in `client/.env.app` (`VITE_API_URL`). App icon and splash screen are drawn by `python tools/make_icons.py`.
+
 ## Tech stack
 
 | Part | Technology |
 |---|---|
 | Frontend | React 19 + Vite, React Router, Leaflet maps, Lucide icons |
+| Android | Capacitor 6 (the React app packaged as a native APK) |
 | Backend | Node.js + Express 5, REST API, JWT login, bcrypt password hashing, Multer photo uploads |
 | Database | SQLite (built into Node.js) |
 | Real data | OpenStreetMap Overpass API + Nominatim |
+| Hosting | Render (free web service) |
 
 ## Project structure
 
 ```
-server/   index.js (API routes) · db.js (tables) · seed.js (demo data) · osm.js (real nearby businesses)
-client/   src/pages (screens) · src/components · src/smartAsk.js · src/config.js (app name)
-tools/    fetch_images.py (downloads the category photos)
+server/         index.js (API routes) · db.js (tables) · seed.js (demo data) · osm.js (real nearby businesses) · test/
+client/         src/pages (screens) · src/components · src/api.js · src/smartAsk.js · src/config.js (app name)
+client/android/ Capacitor Android project
+tools/          make_icons.py (app icon) · fetch_images.py (category photos)
+tools/ppt/      builds the presentation        tools/video/   builds the demo video (Remotion)
+tools/guide/    builds the start & demo guide PDF
+render.yaml     Render hosting setup
 ```
 
 To rename the app, edit `client/src/config.js`.
@@ -105,3 +155,5 @@ To rename the app, edit `client/src/config.js`.
 Map and business data © OpenStreetMap contributors (ODbL). Category photos are Creative Commons images from Openverse —
 full list on the in-app **Photo & data credits** page (`client/public/img/credits.json`).
 Sample listings with "Shop No." addresses and their phone numbers are generated demo data.
+
+Made by **Anshul Nautiyal** ([@ANSHUL-REAL](https://github.com/ANSHUL-REAL)).
