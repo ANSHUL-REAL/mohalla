@@ -1,19 +1,26 @@
 // Small helper for talking to the Express API.
 // On the web the API is on the same server. In the Android app the pages are inside the APK,
-// so the app needs the server's address: saved in Server settings, or VITE_API_URL from the build.
+// so the app needs the server's address: saved in Server settings, or VITE_API_URL from the build
+// (the online server on Render). The key was renamed so laptop addresses saved by older APKs are ignored.
+const SERVER_KEY = 'mohalla_server';
+export const DEFAULT_SERVER = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 export const IS_APP = import.meta.env.VITE_APP === '1';
 
 export function getServerUrl() {
   let saved = null;
-  try { saved = localStorage.getItem('lk_server'); } catch { /* storage unavailable */ }
-  return (saved || import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+  try { saved = localStorage.getItem(SERVER_KEY); } catch { /* storage unavailable */ }
+  return (saved || DEFAULT_SERVER).replace(/\/$/, '');
 }
 
 // Changing the server reloads the app, so reading it once here is enough
 export const API_BASE = getServerUrl();
 
 export function saveServerUrl(url) {
-  try { localStorage.setItem('lk_server', url.replace(/\/$/, '')); } catch { /* storage unavailable */ }
+  try {
+    // Saving the built-in address just clears the override
+    if (url.replace(/\/$/, '') === DEFAULT_SERVER) localStorage.removeItem(SERVER_KEY);
+    else localStorage.setItem(SERVER_KEY, url.replace(/\/$/, ''));
+  } catch { /* storage unavailable */ }
 }
 
 // Tidies what people type: "192.168.1.7" becomes "http://192.168.1.7:5000"

@@ -44,17 +44,27 @@ function NotFound() {
   );
 }
 
-// Android app: check the laptop server is reachable before showing the app
+// Android app: check the server is reachable before showing the app.
+// The free online server sleeps when idle and takes up to a minute to wake, so wait long enough.
 function ServerGate({ children }) {
   const [status, setStatus] = useState(IS_APP ? 'checking' : 'ok');
+  const [slow, setSlow] = useState(false);
   useEffect(() => {
     if (!IS_APP) return;
     let cancelled = false;
-    (API_BASE ? pingServer(API_BASE) : Promise.resolve(false))
-      .then((ok) => { if (!cancelled) setStatus(ok ? 'ok' : 'down'); });
-    return () => { cancelled = true; };
+    const slowTimer = setTimeout(() => setSlow(true), 4000);
+    (API_BASE ? pingServer(API_BASE, 75000) : Promise.resolve(false))
+      .then((ok) => { if (!cancelled) setStatus(ok ? 'ok' : 'down'); })
+      .finally(() => clearTimeout(slowTimer));
+    return () => { cancelled = true; clearTimeout(slowTimer); };
   }, []);
-  if (status === 'checking') return <div className="splash"><img src="/logo.svg" alt="" /><p>Connecting…</p></div>;
+  if (status === 'checking') {
+    return (
+      <div className="splash"><img src="/logo.svg" alt="" />
+        <p>{slow ? 'Waking up the server… this can take up to a minute' : 'Connecting…'}</p>
+      </div>
+    );
+  }
   if (status === 'down') return <ServerSetup firstRun />;
   return children;
 }

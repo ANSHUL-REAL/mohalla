@@ -30,14 +30,14 @@ The Android app (`Mohalla.apk`), presentation and demo videos are on the
 
 ## Android app
 
-`Mohalla.apk` (in this folder) is the Android app. Its screens are inside the APK; listings come from the
-laptop running `npm start`, so **the phone and laptop must be on the same Wi-Fi** (or connect the laptop to
-the phone's hotspot; college Wi-Fi often blocks devices from talking to each other).
+`Mohalla.apk` (on the Releases page) is the Android app. Its screens are inside the APK and it gets listings from
+the online server at **https://mohalla-b0lx.onrender.com**, so it works on any network — just install and open it
+(allow "Install unknown apps" when asked). The first open after the server has been idle shows
+"Waking up the server…" for up to a minute.
 
-1. Run `npm start` on the laptop. It prints the address to use, e.g. `On your phone: http://192.168.1.7:5000`.
-2. Copy `Mohalla.apk` to the phone and install it (allow "Install unknown apps" when asked).
-3. Open Mohalla. If the laptop's address has changed, the app shows **Connect to server**: type the address
-   printed in step 1. You can change it later from the "Server settings" link on the Login / Account page.
+To use a laptop instead (e.g. with no internet), run `npm start`, open **Server settings** (link on the Login /
+Account page) and type the address it prints, e.g. `http://192.168.1.7:5000` — phone and laptop must be on the
+same Wi-Fi. **Use online server** on that screen switches back.
 
 To rebuild the APK after changing the code (needs JDK 17 and the Android SDK):
 
@@ -46,7 +46,7 @@ cd client
 npm run android     # builds the app bundle, syncs it and runs Gradle
 ```
 
-The result is `client/android/app/build/outputs/apk/debug/app-debug.apk`. The default server address baked
+The result is `client/android/app/build/outputs/apk/debug/app-debug.apk`. The server address baked
 into the APK is in `client/.env.app`. App icon and splash screen are drawn by `python tools/make_icons.py`.
 
 ## Demo logins
