@@ -20,7 +20,11 @@ Everything below is on the [Releases page](https://github.com/ANSHUL-REAL/mohall
 | `Mohalla_Demo.mp4` | Demo video walking through the app |
 | `Mohalla_Launch.mp4` | Short launch / promo video |
 
-`Mohalla_Start_and_Demo_Guide.pdf` (in this repo) explains how to start the app and present the demo.
+Guides in this repo:
+
+- `Mohalla_Start_and_Demo_Guide.pdf` — how to start the app, the demo-day checklist and a word-for-word demo script
+- `Mohalla_Tech_and_Presentation_Guide.pdf` — how Mohalla works (architecture, database, real-data pipeline, security,
+  hosting, testing) and how to present it: opening hooks, a slide-by-slide script with jokes, and viva answers
 
 ## Demo logins
 
@@ -144,7 +148,7 @@ client/         src/pages (screens) · src/components · src/api.js · src/smart
 client/android/ Capacitor Android project
 tools/          make_icons.py (app icon) · fetch_images.py (category photos)
 tools/ppt/      builds the presentation        tools/video/   builds the demo video (Remotion)
-tools/guide/    builds the start & demo guide PDF
+tools/guide/    builds the two guide PDFs
 render.yaml     Render hosting setup
 ```
 
